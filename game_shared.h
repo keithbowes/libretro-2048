@@ -25,4 +25,15 @@ float *game_get_frame_time(void);
 
 void grid_to_screen(vector_t pos, int *x, int *y);
 
+const char *MSG_SCORE;
+const char *MSG_SCORE_UC;
+const char *MSG_BEST_SCORE;
+const char *MSG_PRESS_START;
+const char *MSG_GAME_OVER;
+const char *MSG_YOU_WIN;
+const char *MSG_PAUSED;
+const char *MSG_SELECT_NEW_GAME;
+const char *MSG_START_CONTINUE;
+void retro_init_msgs(void);
+
 #endif

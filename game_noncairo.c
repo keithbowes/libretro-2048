@@ -305,10 +305,10 @@ static void init_static_surface(void)
    nullctx_fontsize(1) ;
 
    /* score title */
-   draw_text_centered(static_ctx, "SCORE", SPACING*2, SPACING * 2, 0, 0);
+   draw_text_centered(static_ctx, MSG_SCORE_UC, SPACING*2, SPACING * 2, 0, 0);
 
    /* best title */
-   draw_text_centered(static_ctx, "BEST", TILE_SIZE*2+SPACING*5, SPACING*2, 0, 0);
+   draw_text_centered(static_ctx, MSG_BEST_SCORE, TILE_SIZE*2+SPACING*5, SPACING*2, 0, 0);
 
    /* draw background cells */
    dummy.move_time   = 1;
@@ -336,7 +336,8 @@ void game_init(void)
 
    srand(t);
 
-	initgraph();
+   retro_init_msgs();
+   initgraph();
 
    init_luts();
    init_static_surface();
@@ -427,7 +428,7 @@ void render_title(void)
    nullctx_fontsize(1);
    nullctx.color= color_lut[1];
 
-   draw_text_centered(ctx, "PRESS START", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_PRESS_START, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 
 }
@@ -447,13 +448,13 @@ void render_win_or_game_over(void)
 
    nullctx_fontsize(2); 
    set_rgb(ctx, 185, 172, 159);
-   draw_text_centered(ctx, (state == STATE_GAME_OVER ? "Game Over" : "You Win"), 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
+   draw_text_centered(ctx, (state == STATE_GAME_OVER ? MSG_GAME_OVER : MSG_YOU_WIN), 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
 
    nullctx_fontsize(1);
  
    set_rgb(ctx, 185, 172, 159);
 
-   sprintf(tmp, "Score: %i", game_get_score());
+   sprintf(tmp, "%s: %i", MSG_SCORE, game_get_score());
    draw_text_centered(ctx, tmp, 0, 0, SCREEN_WIDTH, TILE_SIZE*5);
 
    set_rgb(ctx, 185, 172, 159);
@@ -461,7 +462,7 @@ void render_win_or_game_over(void)
 
    nullctx.color=color_lut[1];
 
-   draw_text_centered(ctx, "PRESS START", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_PRESS_START, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 }
 
@@ -478,12 +479,12 @@ void render_paused(void)
 
    nullctx_fontsize(2); 
    set_rgb(ctx, 185, 172, 159);
-   draw_text_centered(ctx, "Paused", 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
+   draw_text_centered(ctx, MSG_PAUSED, 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
 
    nullctx_fontsize(1);
    set_rgb(ctx, 185, 172, 159);
 
-   sprintf(tmp, "Score: %i", game_get_score());
+   sprintf(tmp, "%s: %i", MSG_SCORE, game_get_score());
    draw_text_centered(ctx, tmp, 0, 0, SCREEN_WIDTH, TILE_SIZE*5);
 
    set_rgb(ctx, 185, 172, 159);
@@ -491,9 +492,9 @@ void render_paused(void)
 
    nullctx.color= color_lut[1];
 
-   draw_text_centered(ctx, "SELECT: New Game", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_SELECT_NEW_GAME, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
-   draw_text_centered(ctx, "START: Continue", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING + FONT_SIZE * 2,
+   draw_text_centered(ctx, MSG_START_CONTINUE, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING + FONT_SIZE * 2,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 }
 

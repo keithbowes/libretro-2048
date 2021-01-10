@@ -440,3 +440,46 @@ void grid_to_screen(vector_t pos, int *x, int *y)
    *x = SPACING * 2 + ((TILE_SIZE + SPACING) * pos.x);
    *y = BOARD_OFFSET_Y + SPACING + ((TILE_SIZE + SPACING) * pos.y);
 }
+
+void retro_init_msgs(void)
+{
+   enum retro_language lingua;
+   environ_cb(RETRO_ENVIRONMENT_GET_LANGUAGE, &lingua);
+
+   switch (lingua)
+   {
+      case RETRO_LANGUAGE_ESPERANTO:
+         MSG_SCORE = "Poentaro";
+         MSG_SCORE_UC = "POENTARO";
+         MSG_BEST_SCORE = "PLEJ BONA";
+         MSG_PRESS_START = "PREMU LA KOMENCO-BUTONON";
+         MSG_GAME_OVER = "Vi malvenkis";
+         MSG_YOU_WIN = "Vi venkis";
+         MSG_PAUSED = "Paŭzinta";
+         MSG_SELECT_NEW_GAME = "ELEKTO-BUTONO: Nova ludo";
+         MSG_START_CONTINUE = "KOMENCO-BUTONO: Daŭrigo";
+         break;
+      case RETRO_LANGUAGE_GERMAN:
+         MSG_SCORE = "Spielstand";
+         MSG_SCORE_UC = "SPIELSTAND";
+         MSG_BEST_SCORE = "BESTER";
+         MSG_PRESS_START = "DRÜCKE DEN STARTKNOPF";
+         MSG_GAME_OVER = "Du hast verloren";
+         MSG_YOU_WIN = "Du hast gewonnen";
+         MSG_PAUSED = "Pausiert";
+         MSG_SELECT_NEW_GAME = "AUSWAHLKNOPF: Neues Spiel";
+         MSG_START_CONTINUE = "STARTKNOPF: Fortsetzen";
+         break;
+      default:
+         MSG_SCORE = "Score";
+         MSG_SCORE_UC = "SCORE";
+         MSG_BEST_SCORE = "BEST";
+         MSG_PRESS_START = "PRESS START";
+         MSG_GAME_OVER = "Game Over";
+         MSG_YOU_WIN = "You Win";
+         MSG_PAUSED = "Paused";
+         MSG_SELECT_NEW_GAME = "SELECT: New Game";
+         MSG_START_CONTINUE = "START: Continue";
+         break;
+   }
+}

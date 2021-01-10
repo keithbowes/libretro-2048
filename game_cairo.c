@@ -176,11 +176,11 @@ static void init_static_surface(void)
 
    // score title
    cairo_set_source(static_ctx, color_lut[1]);
-   draw_text_centered(static_ctx, "SCORE", SPACING*2, SPACING * 2, 0, 0);
+   draw_text_centered(static_ctx, MSG_SCORE_UC, SPACING*2, SPACING * 2, 0, 0);
 
    // best title
    cairo_set_source(static_ctx, color_lut[1]);
-   draw_text_centered(static_ctx, "BEST", TILE_SIZE*2+SPACING*5, SPACING*2, 0, 0);
+   draw_text_centered(static_ctx, MSG_BEST_SCORE, TILE_SIZE*2+SPACING*5, SPACING*2, 0, 0);
 
    // draw background cells
    dummy.move_time = 1;
@@ -206,6 +206,7 @@ void game_init(void)
 {
    frame_buf = calloc(SCREEN_HEIGHT, SCREEN_PITCH);
    srand(time(NULL));
+   retro_init_msgs();
 
    surface = cairo_image_surface_create_for_data(
             (unsigned char*)frame_buf, CAIRO_FORMAT_RGB16_565, SCREEN_WIDTH, SCREEN_HEIGHT,
@@ -323,7 +324,7 @@ void render_title(void)
    cairo_set_font_size(ctx, FONT_SIZE);
 
    cairo_set_source(ctx, color_lut[1]);
-   draw_text_centered(ctx, "PRESS START", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_PRESS_START, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 
 }
@@ -344,20 +345,20 @@ void render_win_or_game_over(void)
    cairo_set_font_size(ctx, FONT_SIZE * 2);
 
    set_rgb(ctx, 185, 172, 159);
-   draw_text_centered(ctx, (state == STATE_GAME_OVER ? "Game Over" : "You Win"), 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
+   draw_text_centered(ctx, (state == STATE_GAME_OVER ? MSG_GAME_OVER : MSG_YOU_WIN), 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
 
    cairo_select_font_face(ctx, FONT, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
    cairo_set_font_size(ctx, FONT_SIZE);
 
    set_rgb(ctx, 185, 172, 159);
 
-   sprintf(tmp, "Score: %i", game_get_score());
+   sprintf(tmp, "%s: %i", MSG_SCORE, game_get_score());
    draw_text_centered(ctx, tmp, 0, 0, SCREEN_WIDTH, TILE_SIZE*5);
 
    set_rgb(ctx, 185, 172, 159);
    fill_rectangle(ctx, TILE_SIZE / 2, TILE_SIZE * 4, SCREEN_HEIGHT - TILE_SIZE * 2, FONT_SIZE * 3);
    cairo_set_source(ctx, color_lut[1]);
-   draw_text_centered(ctx, "PRESS START", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_PRESS_START, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 }
 
@@ -374,22 +375,22 @@ void render_paused(void)
    cairo_set_font_size(ctx, FONT_SIZE * 2);
 
    set_rgb(ctx, 185, 172, 159);
-   draw_text_centered(ctx, "Paused", 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
+   draw_text_centered(ctx, MSG_PAUSED, 0, 0, SCREEN_WIDTH, TILE_SIZE*3);
 
    cairo_select_font_face(ctx, FONT, CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
    cairo_set_font_size(ctx, FONT_SIZE);
 
    set_rgb(ctx, 185, 172, 159);
 
-   sprintf(tmp, "Score: %i", game_get_score());
+   sprintf(tmp, "%s: %i", MSG_SCORE, game_get_score());
    draw_text_centered(ctx, tmp, 0, 0, SCREEN_WIDTH, TILE_SIZE*5);
 
    set_rgb(ctx, 185, 172, 159);
    fill_rectangle(ctx, TILE_SIZE / 2, TILE_SIZE * 4, SCREEN_HEIGHT - TILE_SIZE * 2, FONT_SIZE * 5);
    cairo_set_source(ctx, color_lut[1]);
-   draw_text_centered(ctx, "SELECT: New Game", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
+   draw_text_centered(ctx, MSG_SELECT_NEW_GAME, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
-   draw_text_centered(ctx, "START: Continue", TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING + FONT_SIZE * 2,
+   draw_text_centered(ctx, MSG_START_CONTINUE, TILE_SIZE / 2 + SPACING, TILE_SIZE * 4 + SPACING + FONT_SIZE * 2,
                       SCREEN_HEIGHT - TILE_SIZE * 2 - SPACING * 2, FONT_SIZE * 3 - SPACING * 2);
 }
 
