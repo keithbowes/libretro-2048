@@ -9,5 +9,10 @@ INCFLAGS += -I$(LIBRETRO_COMM_DIR)/include/compat/msvc
 endif
 
 SOURCES_C := $(CORE_DIR)/libretro.c \
-	$(CORE_DIR)/game_noncairo.c \
 	$(CORE_DIR)/game_shared.c
+
+ifeq (0,$(WANT_CAIRO))
+	SOURCES_C += $(CORE_DIR)/game_noncairo.c
+else
+	SOURCES_C += $(CORE_DIR)/game_cairo.c
+endif
